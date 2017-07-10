@@ -10,15 +10,12 @@ RUN apt-get update -y && apt-get install -y \
     unzip \
     bzip2 \ 
     g++ \ 
-    make \ 
-    unzip \
+    make \
+    zlib1g-dev \
+    ncurses-dev \ 
     python \
     default-jdk \
-    default-jre 
-    
-#combine eventually
-RUN apt-get update -y && apt-get install -y \
-    zlib1g-dev \
+    default-jre \
     libncurses5-dev
 
 ###############
