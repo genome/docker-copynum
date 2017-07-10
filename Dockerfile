@@ -13,7 +13,7 @@ RUN apt-get update -y && apt-get install -y \
     unzip \
     python \
     default-jdk \
-    default-jre \
+    default-jre 
     
 ###############
 #Varscan 2.4.2#
