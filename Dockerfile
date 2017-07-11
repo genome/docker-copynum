@@ -31,40 +31,30 @@ RUN wget https://github.com/dkoboldt/varscan/releases/download/2.4.2/VarScan.v2.
 #COPY intervals_to_bed.pl /usr/bin/intervals_to_bed.pl
 #COPY varscan_helper.sh /usr/bin/varscan_helper.sh
 
-##############
-#HTSlib 1.3.2#
-##############
-ENV HTSLIB_INSTALL_DIR=/opt/htslib
-
-WORKDIR /tmp
-RUN wget https://github.com/samtools/htslib/releases/download/1.3.2/htslib-1.3.2.tar.bz2 && \
-    tar --bzip2 -xvf htslib-1.3.2.tar.bz2 && \
-    cd /tmp/htslib-1.3.2 && \
-    ./configure  --enable-plugins --prefix=$HTSLIB_INSTALL_DIR && \
-    make && \
-    make install && \
-    cp $HTSLIB_INSTALL_DIR/lib/libhts.so* /usr/lib/ && \
-ln -s $HTSLIB_INSTALL_DIR/bin/tabix /usr/bin/tabix
-
 ################
-#Samtools 1.3.1#
+#Samtools 1.5#
 ################
+
+RUN apt-get update -y && apt-get install -y libbz2-dev \
+    liblzma-dev 
+
 ENV SAMTOOLS_INSTALL_DIR=/opt/samtools
 
 WORKDIR /tmp
-RUN wget https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1.3.1.tar.bz2 && \
-    tar --bzip2 -xf samtools-1.3.1.tar.bz2
+RUN wget https://github.com/samtools/samtools/releases/download/1.5/samtools-1.5.tar.bz2 && \
+    tar --bzip2 -xf samtools-1.5.tar.bz2
 
-WORKDIR /tmp/samtools-1.3.1
-RUN ./configure --with-htslib=$HTSLIB_INSTALL_DIR --prefix=$SAMTOOLS_INSTALL_DIR && \
+WORKDIR /tmp/samtools-1.5
+RUN ./configure  --prefix=$SAMTOOLS_INSTALL_DIR && \
     make && \
     make install
 
 WORKDIR /
-RUN rm -rf /tmp/samtools-1.3.1
+RUN rm -rf /tmp/samtools-1.5
 
 ##add to top
 RUN apt-get update -y && apt-get install -y python-pip
+RUN pip install --upgrade pip
 
 ######
 #Toil#
@@ -88,3 +78,19 @@ RUN apt-get update && apt-get install -y r-base littler
 
 ADD rpackage.R /tmp/
 RUN R -f /tmp/rpackage.R
+
+############
+#py_scripts#
+############
+ENV COPY_NUM_INSTALL_DIR=/opt/copy_num
+
+WORKDIR $COPY_NUM_INSTALL_DIR
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/copy_num.py
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/combine.py
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/create_script.py
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/get_norm_tum_ratio.py 
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/parse_regions.py
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/process_results.py
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/recenter.py 
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/sequence.py 
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/split.py
