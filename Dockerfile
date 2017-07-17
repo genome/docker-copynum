@@ -82,15 +82,6 @@ RUN R -f /tmp/rpackage.R
 ############
 #py_scripts#
 ############
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/copy_num.py
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/combine.py
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/get_norm_tum_ratio.py 
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/parse_regions.py
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/process_results.py
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/recenter.py 
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/seg_combine.py
-#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/split.py
-
 COPY /py_scripts/copy_num.py /opt/copy_num/copy_num.py
 COPY /py_scripts/combine.py /opt/copy_num/combine.py
 COPY /py_scripts/get_norm_tum_ratio.py /opt/copy_num/get_norm_tum_ratio.py
