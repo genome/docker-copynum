@@ -82,17 +82,26 @@ RUN R -f /tmp/rpackage.R
 ############
 #py_scripts#
 ############
-ENV COPY_NUM_INSTALL_DIR=/opt/copy_num
+#ENV COPY_NUM_INSTALL_DIR=/opt/copy_num
 
-WORKDIR $COPY_NUM_INSTALL_DIR
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/copy_num.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/combine.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/get_norm_tum_ratio.py 
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/parse_regions.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/process_results.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/recenter.py 
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/seg_combine.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/split.py
+#WORKDIR $COPY_NUM_INSTALL_DIR
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/copy_num.py
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/combine.py
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/get_norm_tum_ratio.py 
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/parse_regions.py
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/process_results.py
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/recenter.py 
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/seg_combine.py
+#RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/split.py
+
+COPY /py_scripts/copy_num.py /opt/copy_num
+COPY /py_scripts/combine.py /opt/copy_num
+COPY /py_scripts/get_norm_tum_ratio.py /opt/copy_num
+COPY /py_scripts/parse_regions.py /opt/copy_num
+COPY /py_scripts/process_results.py /opt/copy_num
+COPY /py_scripts/recenter.py /opt/copy_num
+COPY /py_scripts/seg_combine.py /opt/copy_num
+COPY /py_scripts/split.py /opt/copy_num
 
 ###########
 #merge_seg#
