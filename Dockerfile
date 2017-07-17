@@ -74,7 +74,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 #R#
 ###
 
-RUN apt-get update && apt-get install -y r-base littler
+RUN apt-get update -y && apt-get install -y r-base littler
 
 ADD rpackage.R /tmp/
 RUN R -f /tmp/rpackage.R
@@ -87,10 +87,17 @@ ENV COPY_NUM_INSTALL_DIR=/opt/copy_num
 WORKDIR $COPY_NUM_INSTALL_DIR
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/copy_num.py
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/combine.py
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/create_script.py
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/get_norm_tum_ratio.py 
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/parse_regions.py
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/process_results.py
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/recenter.py 
-RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/sequence.py 
+RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/seg_combine.py
 RUN wget https://raw.githubusercontent.com/mnneveau/cncwl/master/py_scripts/split.py
+
+###########
+#merge_seg#
+###########
+RUN apt-get update -y && apt-get install -y perl-doc
+COPY mergeCbsSegsFuzzyLog2.pl /usr/bin/mergeCbsSegsFuzzyLog2.pl
+RUN chmod 666 /usr/bin/mergeCbsSegsFuzzyLog2.pl
+
