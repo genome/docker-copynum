@@ -80,7 +80,7 @@ ADD rpackage.R /tmp/
 RUN R -f /tmp/rpackage.R
 
 ############
-#py_scripts#
+#scripts#
 ############
 COPY /py_scripts/copy_num.py /opt/copy_num/copy_num.py
 COPY /py_scripts/combine.py /opt/copy_num/combine.py
@@ -90,6 +90,7 @@ COPY /py_scripts/process_results.py /opt/copy_num/process_results.py
 COPY /py_scripts/recenter.py /opt/copy_num/recenter.py
 COPY /py_scripts/seg_combine.py /opt/copy_num/seg_combine.py
 COPY /py_scripts/split.py /opt/copy_num/split.py
+COPY clean_helper.sh /opt/copy_num/clean_helper.sh
 
 ###########
 #merge_seg#
