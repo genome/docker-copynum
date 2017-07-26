@@ -1,10 +1,10 @@
 import sys, os, re
 seg_files = []
 outdir = sys.argv[1]
-output = sys.argv[-1]
 #load array with input segment files
-for f in sys.argv[2:-1]:
+for f in sys.argv[2:]:
     seg_files.append(f)
+output = varscan.copynumber.called.recentered.segments.tsv
 
 #sort alphanumerically
 def sort_human(l):
