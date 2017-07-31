@@ -4,7 +4,7 @@ outdir = sys.argv[1]
 #load array with input segment files
 for f in sys.argv[2:]:
     seg_files.append(f)
-output = varscan.copynumber.called.recentered.segments.tsv
+output = "varscan.copynumber.called.recentered.segments.tsv"
 
 #sort alphanumerically
 def sort_human(l):
